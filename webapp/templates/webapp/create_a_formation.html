@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Create a Formation</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/create_a_formation.css" %}"/>
+    <script src="{% static 'javascript/draw_formation.js' %}"></script>
+    <script src="{% static 'javascript/num_of_player_checker.js' %}"></script>
+  </head>
+  <body>
+    <header>
+      <h1>YokohamaF･Marinos Info</h1>
+    </header>
+
+    <h2 id = "subtitle"><span class="border-bottom">Create a Formation</span></h2>
+    <div id = "information">
+        <h3>{{information}}</h3>
+    </div>
+    <div class="form">
+      <form action="/create_a_formation/player_register" method="post" name="formation">
+          {% csrf_token %}
+              <div class = "tables">
+                  <table id="formation_table">
+                      <tr>
+                          <th>FW</th>
+                          <td id = "num_of_FW">{{fs_form.num_of_FW}}<input type="hidden" name="num_of_fw" value="{{num_of_FW}}"></td>
+                      </tr>
+                      <tr>
+                          <th>MF</th>
+                          <td id = "num_of_MF">{{fs_form.num_of_MF}}<input type="hidden" name="num_of_mf" value="{{num_of_MF}}"></td>
+                      </tr>
+                      <tr>
+                          <th>DF</th>
+                          <td id = "num_of_DF">{{fs_form.num_of_DF}}<input type="hidden" name="num_of_df" value="{{num_of_DF}}"></td>
+                      </tr>
+                      <tr>
+                          <th>GK</th>
+                          <td>1</td>
+                      </tr>
+                  </table>
+              <div class="btn">
+                  <p><a href="#" class="btn-flat-border"><button type="button" class="clear-decoration" onclick="submitAfterValidation()">{{next}}</button></a></p>
+              </div>
+      </form>     
+    </div>
+    
+    <p id ="home_link"><a href="{% url 'webapp:index' %}">HOMEに戻る</a></p>
+
+    <footer>
+      <p>MADE BY <b id = 'test'>{{ name }}</b>.</p>
+    </footer>
+  </body>
+</html>

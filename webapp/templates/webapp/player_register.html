@@ -1,0 +1,68 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Create a Formation</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/player_register.css" %}"/>
+  </head>
+  <body>
+    <header>
+      <h1>YokohamaF･Marinos Info</h1>
+    </header>
+
+    <h2 id = "subtitle"><span class="border-bottom">Create a Formation</span></h2>
+    
+    <div class="wrapper">
+      <div class="container">
+        <div class="form">
+          <div id = "information">
+            <h3>{{information | safe}}</h3>
+          </div>
+          <form action="/create_a_formation/player_register" method="post">
+              {% csrf_token %}
+                  <input type="hidden" name="num_of_FW" value="{{num_of_FW}}">
+                  <input type="hidden" name="num_of_MF" value="{{num_of_MF}}">
+                  <input type="hidden" name="num_of_DF" value="{{num_of_DF}}">
+                  <div class=table>
+                      <table id="player_register">
+                          {% for h in player_forms %}
+                              <tr>
+                                  <th>{{h.idx}}</th>
+                                  <td>{{h.pos}}</td>
+                                  <td id = "selected_player">{{h.form.player}}</td>
+                              </tr>
+                          {% endfor%}
+                      </table>
+                  </div>
+                  <div class="btn">
+                      <p><a href="#" class="btn-flat-border"><button type="submit" class="clear-decoration">{{next}}</button></a></p>
+                  </div>
+          </form>
+        </div>
+        <div class="result">
+          <div id = formation>
+              <h2>Formation: {{num_of_DF|safe}}-{{num_of_MF|safe}}-{{num_of_FW|safe}}</h2>
+          </div>
+
+          <div id = "canvas_wrapper">
+              <canvas id="rectangle" width="600" height="600"></canvas>
+              <input type="hidden" id="player_name" name="player_name" value="{{player | safe}}">
+              <input type="hidden" id="df" name="df" value="{{num_of_DF}}">
+              <input type="hidden" id="mf" name="mf" value="{{num_of_MF}}">
+              <input type="hidden" id="fw" name="fw" value="{{num_of_FW}}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p id ="remake_link"><a href="{% url 'webapp:create_a_formation' %}">作り直す</a></p>
+    <p id ="home_link"><a href="{% url 'webapp:index' %}">HOMEに戻る</a></p>
+
+    <footer>
+      <p>MADE BY <b id = 'test'>{{ name }}</b>.</p>
+    </footer>
+  </body>
+  <script src="{% static 'javascript/draw_formation.js' %}"></script>
+</html>

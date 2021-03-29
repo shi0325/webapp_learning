@@ -1,0 +1,22 @@
+.image{
+    text-align: center;
+}
+
+#player_directory_link{
+    padding: 0px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#create_a_formation_link{
+    padding: 0px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#past_match_results_link{
+    margin-top: 15px;
+    padding: 0px;
+    text-align: center;
+    font-size: 20px;
+}
